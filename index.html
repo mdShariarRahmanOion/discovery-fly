@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+        <div class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class ($<span id="fastClass-total">150</span> )</label>
+                    
+                </div>
+                <div  class="plus-minus-btn d-flex">
+                    <input id="fastClass-count" class="inp-style inp-width" type="text" value="0">
+                    <button onclick="handBookingChange('fastClass', true)" class="btn btn-primary m-1">+</button>
+                    <button onclick="handBookingChange('fastClass', false)" class="btn btn-secondary m-1">-</button>
+                </div>
+            </div>
+
+<div class="input-group f-class">
+                <div>
+                    <label for="">Economy($<span id="economy-total">100</span> )</label>
+                    
+                </div>
+                <div  class="plus-minus-btn d-flex">
+                    <input id="economy-count" class="inp-style inp-width" type="text" value="0">
+                    <button onclick=" handBookingChange('economy', true)" class="btn btn-primary m-1">+</button>
+                    <button onclick="handBookingChange('economy', false)" class="btn btn-secondary m-1">-</button>
+                </div>
+            </div>
+            
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="total-price">$000</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="text-amount">$00</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount" >
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="grand-total">$000</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style">Book Now</button>
+        </div>
+
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+        </div>
+
+        <script>
+
+
+         function handBookingChange (booking, isIncrease) {
+            const bookingInput  =document.getElementById(booking+'-count');
+            const bookingCount = parseInt(bookingInput.value);
+         //  const fastNewCount = fastCount - 1;
+         let bookingNewCount = bookingCount;
+         if(isIncrease == true){
+            bookingNewCount = bookingCount+1;
+         }
+         if(isIncrease == false && bookingCount>0){
+            bookingNewCount = bookingCount-1;
+         }
+          bookingInput.value=bookingNewCount;
+        // const bookingTotal = bookingNewCount*100;
+        let bookingCostTotal = 0;
+        if(booking == 'fastClass'){
+            bookingCostTotal=bookingNewCount*150;
+        }
+        if (booking == 'economy' ){
+            bookingCostTotal = bookingNewCount*100;
+        }
+          document.getElementById(booking+'-total').value =bookingCostTotal; 
+          calculateTotal();
+         }   
+         
+        //  calculate all ticket 
+ function calculateTotal(){
+     const fastAllInput = document.getElementById('fastClass-count');
+    const fastAllCount = parseInt(fastAllInput.value);
+
+    const economyInput= document.getElementById('economy-count');
+    const economyAllCount=parseInt(economyInput.value);
+
+    const totalPrice = fastAllCount*150 + economyAllCount*100;
+    document.getElementById('total-price').innerText = '$'+ totalPrice;
+ 
+    const vat  = totalPrice*0.1;
+    document.getElementById('text-amount').innerText = '$' + vat;
+
+    const grandTotalPrice = totalPrice + vat;
+    document.getElementById('grand-total').innerText='$' + grandTotalPrice;
+}
+
+
+
+
+        //  function handleProductChange (isIncrease) {
+        //     const fastInput  =document.getElementById('fastClass-count');
+        //     const fastCount = parseInt(fastInput.value);
+        //  //  const fastNewCount = fastCount - 1;
+        //  let fastNewCount = fastCount;
+        //  if(isIncrease == true){
+        //     fastNewCount = fastCount+1;
+        //  }
+        //  if(isIncrease == false && fastCount>0){
+        //     fastNewCount = fastCount-1;
+        //  }
+        //   fastInput.value=fastNewCount;
+        //   const fastTotal = fastNewCount*150;
+        //   document.getElementById('fast-class').innerText = fastTotal; 
+        //  }
+
+
+        //  function handleEconomyChange (isIncrease) {
+        //     const fastInput  =document.getElementById('economy-count');
+        //     const fastCount = parseInt(fastInput.value);
+        //  //  const fastNewCount = fastCount - 1;
+        //  let fastNewCount = fastCount;
+        //  if(isIncrease == true){
+        //     fastNewCount = fastCount+1;
+        //  }
+        //  if(isIncrease == false && fastCount>0){
+        //     fastNewCount = fastCount-1;
+        //  }
+        //   fastInput.value=fastNewCount;
+        //   const fastTotal = fastNewCount*100;
+        //   document.getElementById('economy-class').innerText = fastTotal; 
+        //  }     
+</script>  
+    </section>
+
+    <!--Thank You-->
+</body>
+
+</html>
