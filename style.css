@@ -120,3 +120,14 @@ nav ul li a:hover, a.active{
     display: flex;
     justify-content: space-between;
 }
+#transaction-area{
+    display: none;
+    background-color:white;
+    width: 1350px;
+    height: 650px;
+    padding-top: 200px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+   
+}
